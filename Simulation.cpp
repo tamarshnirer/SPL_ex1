@@ -1,4 +1,4 @@
-#include "Simulation.h"
+#include "/home/spl211/Downloads/SPL/include/Simulation.h"
 
 Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgents(agents) 
 {
@@ -7,7 +7,13 @@ Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgen
 
 void Simulation::step()
 {
-    // TODO: implement this method
+    for (int i = 0; i<mGraph.getNumVertices(); i++) {
+        Party curr_party = mGraph.getParty(i);
+        curr_party.step(*this);
+    }
+    for (int j = 0; j<mAgents.size(); j++) {
+        mAgents[j].step(*this);
+    }
 }
 
 bool Simulation::shouldTerminate() const
