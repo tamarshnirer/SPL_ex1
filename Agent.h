@@ -9,7 +9,7 @@ class Agent
 {
 public:
     Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy);
-
+    // destructor ?
     int getPartyId() const;
     int getId() const;
     void step(Simulation &);
