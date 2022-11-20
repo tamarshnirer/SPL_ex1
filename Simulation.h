@@ -2,8 +2,8 @@
 
 #include <vector>
 
-#include "Graph.h"
-#include "Agent.h"
+#include "/home/spl211/Downloads/SPL/include/Graph.h"
+#include "/home/spl211/Downloads/SPL/include/Agent.h"
 
 using std::string;
 using std::vector;

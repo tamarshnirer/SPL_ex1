@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "Party.h"
+#include "/home/spl211/Downloads/SPL/include/Party.h"
 
 using std::vector;
 

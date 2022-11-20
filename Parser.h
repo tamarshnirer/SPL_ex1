@@ -4,10 +4,10 @@
 #include <fstream>
 
 #include "json.hpp"
-#include "Simulation.h"
-#include "Agent.h"
-#include "SelectionPolicy.h"
-#include "JoinPolicy.h"
+#include "/home/spl211/Downloads/SPL/include/Simulation.h"
+#include "/home/spl211/Downloads/SPL/include/Agent.h"
+#include "/home/spl211/Downloads/SPL/include/SelectionPolicy.h"
+#include "/home/spl211/Downloads/SPL/include/JoinPolicy.h"
 
 using json = nlohmann::json;
 using std::string;
