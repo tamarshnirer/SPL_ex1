@@ -2,8 +2,9 @@
 #include <iomanip>
 #include "/home/spl211/Downloads/SPL/include/Parser.h"
 
-using std::cout;
 using std::endl;
+using std::cout;
+
 
 int main(int argc, char **argv)
 {
