@@ -1,27 +1,37 @@
-#include "/home/spl211/Downloads/SPL/include/Simulation.h"
-#include <vector>
-
-
 Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgents(agents) 
 {
-    // You can change the implementation of the constructor, but not the signature!
+    numOfParties = graph.getNumVertices() ;
+    joinedParties[numOfParties] = {0};  //initialize the array with all 0 (false)
+    for (Agent agent : agents) {
+        joinedParties[agent.getPartyId()] = true ;
+        //should set here the nominees of each agent
+
+        //here we should init all actions on agent ---> with Tamar
+    }
 }
+
+
+//   methods for agents and parties
+
+
 
 void Simulation::step()
 {
-    for (int i = 0; i<mGraph.getNumVertices(); i++) {
-        Party curr_party = this->mGraph.getParty(i);
-        curr_party.step(*this);
+    for (int i = 0; i < numOfParties; i++)  //party steps
+    {
+        mGraph.getPartyById(i).step(*this);
     }
-    for (int j = 0; j<mAgents.size(); j++) {
-        this->mAgents[j].step(*this);
+    for (Agent a: mAgents){  //agent steps
+        a.step(*this);
     }
 }
 
 bool Simulation::shouldTerminate() const
 {
-    // TODO implement this method
-    return true;
+    if(biggestCoalition > 0  || counterJoined == numOfParties ){
+        return true ;
+    }
+    return false;
 }
 
 const Graph &Simulation::getGraph() const
@@ -39,10 +49,23 @@ const Party &Simulation::getParty(int partyId) const
     return mGraph.getParty(partyId);
 }
 
+
+
+//should add all methods for party and agents   ----> Tamar
+
 /// This method returns a "coalition" vector, where each element is a vector of party IDs in the coalition.
 /// At the simulation initialization - the result will be [[agent0.partyId], [agent1.partyId], ...]
 const vector<vector<int>> Simulation::getPartiesByCoalitions() const
 {
-    // TODO: you MUST implement this method for getting proper output, read the documentation above.
-    return vector<vector<int>>();
+    vector<vector<int>> ret ;
+
+    //after well make the coalition pointer
+    for(Coalition c : coalitionPtr){
+        vector<int> vec;
+        for(party& p : c.coalitionParties) {
+            vec.push_back(p.getId());
+        }
+        ret.push_back(vec) ;
+    }
+    return ret ;
 }
