@@ -1,3 +1,7 @@
+#include "/home/spl211/Downloads/SPL/include/Simulation.h"
+#include "/home/spl211/Downloads/SPL/include/Graph.h"
+class graph;
+
 Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgents(agents) 
 {
     numOfParties = graph.getNumVertices() ;
@@ -19,7 +23,7 @@ void Simulation::step()
 {
     for (int i = 0; i < numOfParties; i++)  //party steps
     {
-        mGraph.getPartyById(i).step(*this);
+        mGraph.getParty(i).step(*this);
     }
     for (Agent a: mAgents){  //agent steps
         a.step(*this);

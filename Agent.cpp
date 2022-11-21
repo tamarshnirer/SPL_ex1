@@ -7,8 +7,6 @@
 using namespace std;
 
 
-#include "Agent.h"
-
 Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgentId(agentId), mPartyId(partyId), mSelectionPolicy(selectionPolicy)
 {
     // You can change the implementation of the constructor, but not the signature!
@@ -78,6 +76,11 @@ Agent & Agent::operator=(Agent && other) {
     return *this;
 }
 
+Coalition & Agent::getCoalition()
+{
+    return &mCoalition
+}
+
 int Agent::getId() const
 {
     return mAgentId;
@@ -121,8 +124,9 @@ SelectionPolicy* Agent::getSelectionPolicy() const
 
 void Agent::step(Simulation &sim)
 {
-    Party *chosen = this->getSelectionPolicy()->select(sim, this->getId(), this->getPartyId());
+    Party *chosen = this->getSelectionPolicy()->select(sim.getGraph(), *this);
     if (chosen!=nullptr) {
         chosen->sendOffer(*this);
+        mCoalition->setOfferedMadeByParty(chosen->getId());
     }
 }

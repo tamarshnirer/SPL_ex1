@@ -54,12 +54,13 @@ void Party::step(Simulation &s)
         this->timer +=1;
     }
     if (this->timer == 3) {
-        Agent *chosen = mJoinPolicy->join(s, *this);
-        Agent newAgent(*chosen);
+        Agent *chosen = mJoinPolicy->join(this);
+        Agent newAgent(chosen);
         newAgent.setPartyId(this->mId);
         int nextAgent = s.getAgents().size()-1;
         newAgent.setId(nextAgent);
         newAgent.setPartyId(this->mId);
+        chosen->getCoalition().coalitionJoin(*this);
         s.addAgent(newAgent);
     }
 
