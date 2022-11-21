@@ -40,5 +40,5 @@ private:
     State mState;
     std::vector<Agent> mOffers;
     int timer;
-    int mCoalitionID;
+    Coalition *mCoalitionID;
 };

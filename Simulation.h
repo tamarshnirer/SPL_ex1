@@ -20,6 +20,8 @@ public:
     const vector<Agent> &getAgents() const;
     const Party &getParty(int partyId) const;
     const vector<vector<int>> getPartiesByCoalitions() const;
+    void addAgent(Agent newAgent);
+
 
 
 //should add all methods for party and agents   ----> Tamar
@@ -32,8 +34,7 @@ private:
     //two fields that give information about the terminates:
     int counterJoined ;  //checks how many parties already joined  --> needs to be initialized at the beginning of the simulation.
     int biggestCoalition ; //checks what is the number of mandates of the biggest coalition
-
-    bool joinedParties[getNumVertices]; // initialize the simulation with the parties that already joined to coalition  ---> maybe vector better
+    vector<bool> joinedParties; // initialize the simulation with the parties that already joined to coalition  ---> maybe vector better
     int numOfParties;
     vector<Coalition> coalitions;
 };

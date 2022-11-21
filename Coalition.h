@@ -1,5 +1,5 @@
 #pragma once
-#include "Graph.h"
+#include "/home/spl211/Downloads/SPL/include/Graph.h"
 #include <string>
 #include <vector>
 using std::string;
@@ -7,15 +7,17 @@ using std::string;
 class Coalition
 {
 public:
-    Coalition(int id , int currMandates ) : coalitionID(id) , numOfMandates(currMandates) , offersCoalitionMade = { 0 }; //constructor  (check if we initialize bool array like that)
-    void coalitionJoin(int PartyID) ; //gets the party ID that join the coalition and updates: numOfMandates, BiggestCoalition(for JoinPolicy),
+    Coalition(int id , int currMandates ) : coalitionID(id) , numOfMandates(currMandates) {}; //constructor  (check if we initialize bool array like that)
+    void coalitionJoin(Party & party) ; //gets the party ID that join the coalition and updates: numOfMandates, BiggestCoalition(for JoinPolicy),
                               // counterJoined (checks how many parties already joined (for 'shouldTerminate method) .
+    int getMandates();
+    bool getOfferCoalitionMade(int id);
+    void setOfferedMadeByParty(int partyId);
 
 private:
     int coalitionID ;
     int numOfMandates ;
-    //bool offersCoalitionMade[getNumVertices] ;  //if the coalition made an offer to 'i' party , then offersCoalitionMade[i]=true    --->TAMAR
-
+    bool offersCoalitionMade[10] ; //size need to be initialized in the constructor
     vector<Party&> coalitionParties ;
 };
 
