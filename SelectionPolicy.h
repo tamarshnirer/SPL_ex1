@@ -10,11 +10,11 @@ class SelectionPolicy {
 
 class MandatesSelectionPolicy: public SelectionPolicy{
     public:    
-        virtual Party *select(Simulation &s, int agentID, int partyID) {
+        virtual Party *select(Graph g, Agent &agent) {
             Party *chosen = nullptr;
             int max_mandates = -1;
             for  (int i = 0; i<s.getGraph().getNumVertices(); i++) {
-                if ((i!=partyID) & (s.getGraph().getParty(i).getState()!=2)) {
+                if ((i!=agent->partyID) && (s.getGraph().getParty(i).getState()!=2) && (s.getGraph().getEdgeWeight(partyID,i)>0)) {
                     if (s.getGraph().getParty(i).getMandates() > max_mandates) {
                         max_mandates = s.getGraph().getParty(i).getMandates();
                         *chosen = s.getGraph().getParty(i);
