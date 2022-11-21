@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 #include <vector>
 
@@ -29,6 +30,7 @@ public:
     const string &getName() const;
     void sendOffer(Agent &offerer);
     std::vector<Agent> getOffers();
+    const int & getId();
 
 private:
     int mId;

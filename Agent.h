@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "/home/spl211/Downloads/SPL/include/Graph.h"
+#include "/home/spl211/Downloads/SPL/include/Coalition.h"
 
 class SelectionPolicy;
 
@@ -21,10 +22,11 @@ public:
     Agent& operator=(const Agent &other);
     void setPartyId(int newId);
     void setId(int newId);
+    Coalition & getCoalition();
 
 private:
     int mAgentId;
     int mPartyId;
     SelectionPolicy *mSelectionPolicy;
-    int mCoalitionId;
+    Coalition *mCoalition;
 };
