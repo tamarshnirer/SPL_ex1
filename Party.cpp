@@ -13,7 +13,9 @@ Party::Party(int id, string name, int mandates, JoinPolicy *jp) {
     int timer = 0;
 }
 
-std::vector<Party> Party::getOffers() 
+
+
+std::vector<Agent> Party::getOffers() 
 {
     return this->mOffers;
 }
@@ -38,6 +40,10 @@ const string & Party::getName() const
     return mName;
 }
 
+const int & Party::getId() {
+    return mId;
+}
+
 void Party::step(Simulation &s)
 {
     if ((mState == 0) && (this->getOffers().size() != 0)) {
@@ -48,11 +54,19 @@ void Party::step(Simulation &s)
         this->timer +=1;
     }
     if (this->timer == 3) {
-        mJoinPolicy->join(s, *this);
+        Agent *chosen = mJoinPolicy->join(s, *this);
+        Agent newAgent(*chosen);
+        newAgent.setPartyId(this->mId);
+        int nextAgent = s.getAgents().size()-1;
+        newAgent.setId(nextAgent);
+        newAgent.setPartyId(this->mId);
+        s.addAgent(newAgent);
     }
 
 }
 
-void Party::sendOffer(Party applicant) {
-    this->getOffers().push_back(applicant);
+
+
+void Party::sendOffer(Agent &offerer) {
+    this->mOffers.push_back(offerer);
 }
