@@ -17,7 +17,9 @@ public:
 private:
     int coalitionID ;
     int numOfMandates ;
-    bool offersCoalitionMade[10] ; //size need to be initialized in the constructor
+    int numOfPTotalParties ;
+
+    vector<bool> offersCoalitionMade ;  //if the coalition made an offer to 'i' party , then offersCoalitionMade[i]=true , after the iniztialize 
     vector<Party&> coalitionParties ;
 };
 
