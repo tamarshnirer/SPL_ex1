@@ -6,6 +6,9 @@
 //#include "SelectPolicy.h"
 
 
+
+ Coalition(int id , int currMandates ) : coalitionID(id) , numOfMandates(currMandates) {}; //constructor
+
 void Coalition::coalitionJoin (Party & party)
 {
     int mandates = party.getMandates() ;
