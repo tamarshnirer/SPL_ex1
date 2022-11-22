@@ -7,7 +7,7 @@ using std::string;
 class Coalition
 {
 public:
-    Coalition(int id , int currMandates ) : coalitionID(id) , numOfMandates(currMandates) {}; //constructor  (check if we initialize bool array like that)
+    Coalition(int id , int currMandates )ף
     void coalitionJoin(Party & party) ; //gets the party ID that join the coalition and updates: numOfMandates, BiggestCoalition(for JoinPolicy),
                               // counterJoined (checks how many parties already joined (for 'shouldTerminate method) .
     int getMandates();
