@@ -106,10 +106,6 @@ int Agent::getPartyId() const
     return mPartyId;
 }
 
-void Agent::step(Simulation &sim)
-{
-    // TODO: implement this method
-}
 
 int Agent::getId() const
 {
