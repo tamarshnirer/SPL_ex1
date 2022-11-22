@@ -9,7 +9,7 @@ class Coalition
 public:
     Coalition(int id , int currMandates , int numOfParties );
     void coalitionJoin(Party & party) ; //gets the party ID that join the coalition and updates: numOfMandates, BiggestCoalition(for JoinPolicy),
-                              // counterJoined (checks how many parties already joined (for 'shouldTerminate method) .
+                                        // counterJoined (checks how many parties already joined (for 'shouldTerminate method) .
     int getMandates();
     bool getOfferCoalitionMade(int id);
     void setOfferedMadeByParty(int partyId);
