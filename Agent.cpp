@@ -48,7 +48,7 @@ Agent& Agent::operator=(const Agent & other)
 {
     mAgentId = other.mAgentId;
     mPartyId = other.mPartyId;
-    mCoalition = other.mCoalition;
+    coalitionPtr = other.coalitionPtr;
     //mSelectionPolicy = other.mSelectionPolicy->clonePolicy(); //after define "policyClone" at selection policy class - creates a deep copy of selection policy
     
         //and more if needed or added
@@ -60,7 +60,7 @@ Agent& Agent::operator=(const Agent & other)
 Agent & Agent::operator=(Agent && other) {
     mAgentId = other.mAgentId;
     mPartyId = other.mPartyId;
-    mCoalition = other.mCoalition;
+    coalitionPtr = other.coalitionPtr;
 
 //    if(mSelectionPolicy) {
 //        delete mSelectionPolicy;
@@ -86,7 +86,7 @@ void Agent::newAgentClone(Simulation& s, int partyID) {
     int agentNewId = s.getAgentVector()->size();
     s.getAgentVector()->push_back(Agent(agentNewId ,partyID, mSelectionPolicy));
     Agent newAgent = s.getAgentVector()->back();
-    newAgent.coalition = coalition;
+    newAgent.coalitionPtr = coalitionPtr;
 }
 
 
@@ -142,6 +142,6 @@ void Agent::step(Simulation &sim)
     Party *chosen = this->getSelectionPolicy()->select(sim.getGraph(), *this);
     if (chosen!=nullptr) {
         chosen->sendOffer(*this);
-        mCoalition->setOfferedMadeByParty(chosen->getId());
+        coalitionPtr->setOfferedMadeByParty(chosen->getId());
     }
 }
