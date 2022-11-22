@@ -21,6 +21,15 @@ Party *MandatesSelectionPolicy::select(Graph g, Agent &agent) {
     return chosen;
 }
 
+
+SelectionPolicy* MandatesSelectionPolicy::clonePolicy() {
+
+    MandatesSelectionPolicy* CMPolicy = new MandatesSelectionPolicy(this->getPartyID());
+    return CMPolicy;
+}
+
+
+
  Party *EdgeWeightSelectionPolicy::select(Graph g, Agent &agent) {
     Party *chosen = nullptr;
     int max_weight = -1;
@@ -34,3 +43,15 @@ Party *MandatesSelectionPolicy::select(Graph g, Agent &agent) {
     }
     return chosen;
 }
+
+
+
+
+SelectionPolicy* EdgeWeightSelectionPolicy::clonePolicy() {
+    EdgeWeightSelectionPolicy* CWPolicy = new EdgeWeightSelectionPolicy (this->getPartyID());
+    return CWPolicy ;
+}
+
+
+
+
