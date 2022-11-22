@@ -23,6 +23,8 @@ public:
     void setPartyId(int newId);
     void setId(int newId);
     Coalition & getCoalition();
+    void newAgentClone(Simulation& s,int party);
+
 
 private:
     int mAgentId;
