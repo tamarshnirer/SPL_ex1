@@ -7,12 +7,15 @@
 
 
 
- Coalition(int id , int currMandates ) : coalitionID(id) , numOfMandates(currMandates) {}; //constructor
+Coalition :: Coalition(int id , int currMandates , int numParties ) : coalitionID(id) , numOfMandates(currMandates) , numOfPTotalParties(numParties) {  //constructor
+    for (int i = 0; i < numOfParties; i++) {
+        offersCoalitionMade.push_back(false) ;
+    }
+}
 
 void Coalition::coalitionJoin (Party & party)
 {
-    int mandates = party.getMandates() ;
-    numOfMandates = numOfMandates + mandates ;   //update the number of mandates of the coalition
+    numOfMandates = numOfMandates + party.getMandates() ;   //update the number of mandates of the coalition
     coalitionParties.push_back(party) ;
 }
 
