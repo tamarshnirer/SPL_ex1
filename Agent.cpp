@@ -93,7 +93,7 @@ void Agent::newAgentClone(Simulation& s, int partyID) {
 
 Coalition & Agent::getCoalition()
 {
-    return &mCoalition
+    return *coalitionPtr ;
 }
 
 int Agent::getId() const
