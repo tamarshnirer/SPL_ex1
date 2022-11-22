@@ -4,18 +4,21 @@
 #include "/home/spl211/Downloads/SPL/include/Graph.h"
 
 class SelectionPolicy {
-    public:
-        SelectionPolicy();
-        virtual Party *select();
- };
+public:
+    SelectionPolicy();
+    virtual SelectionPolicy* clonePolicy() = 0;
+    virtual Party *select();
+};
 
 class MandatesSelectionPolicy: public SelectionPolicy{
-    public:
-        virtual Party *select();
-        
- };
+public:
+    virtual Party *select();
+    SelectionPolicy* clonePolicy();
+
+};
 
 class EdgeWeightSelectionPolicy: public SelectionPolicy{
-    public:
-        virtual Party *select();
- };
+public:
+    virtual Party *select();
+    SelectionPolicy* clonePolicy();
+};
