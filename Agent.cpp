@@ -9,10 +9,9 @@ using namespace std;
 
 Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgentId(agentId), mPartyId(partyId), mSelectionPolicy(selectionPolicy)
 {
-    // You can change the implementation of the constructor, but not the signature!
 }
 
-Agent::~Agent ()
+Agent::~Agent ()   //Deconstructor 
 {
     if (mSelectionPolicy)
     {
@@ -25,25 +24,24 @@ Agent::Agent(const Agent & other)
 {
     mAgentId = other.mAgentId;
     mPartyId = other.mPartyId;
-    mCoalition = other.mCoalition;
-
+    coalitionPtr = other.coalitionPtr ;
    // mSelectionPolicy = other.mSelectionPolicy->policyClone(); //after define "policyClone" at selection policy class - creates a deep copy of selection policy
-    //update the list of nominees (ex: nominees = other.nominees; )
-    //coalitionPtr = other.coalitionPtr   ---->if well get a coalition pointer
+       //and more if needed or added
+
 }
 
 //Move Constructor:
 Agent::Agent (Agent && other) {
     mAgentId = other.mAgentId;
     mPartyId = other.mPartyId;
-    mCoalition = other.mCoalition;
+    coalitionPtr = other.coalitionPtr;
+    other.coaltionPtr = nullptr ;
     mSelectionPolicy = other.mSelectionPolicy;
     other.mSelectionPolicy = nullptr;
-    //nominees = other.nominees;
-    //coalitionPtr = other.coalitionPtr   --> if well get a coalition pointer
-    //other.coalition = nullptr;    --> if well get a coalition pointer
+    
+    //and more if needed or added
 
-}
+}  
 
 //Copy Assignment Operator:
 Agent& Agent::operator=(const Agent & other)
@@ -52,7 +50,9 @@ Agent& Agent::operator=(const Agent & other)
     mPartyId = other.mPartyId;
     mCoalition = other.mCoalition;
     //mSelectionPolicy = other.mSelectionPolicy->clonePolicy(); //after define "policyClone" at selection policy class - creates a deep copy of selection policy
-    //nominees = other.nominees;
+    
+        //and more if needed or added
+
     return *this;
 }
 
@@ -61,7 +61,7 @@ Agent & Agent::operator=(Agent && other) {
     mAgentId = other.mAgentId;
     mPartyId = other.mPartyId;
     mCoalition = other.mCoalition;
-   // nominees = other.nominees;
+
 //    if(mSelectionPolicy) {
 //        delete mSelectionPolicy;
 //    }
@@ -72,9 +72,24 @@ Agent & Agent::operator=(Agent && other) {
 //    other.coalition = nullptr;
 //    mSelectionPolicy = other.mSelectionPolicy->clonePolicy();
 //    other.mSelectionPolicy = nullptr;
+    
+    
+        //and more if needed or added
+
 
     return *this;
 }
+
+
+
+void Agent::newAgentClone(Simulation& s, int partyID) {
+    int agentNewId = s.getAgentVector()->size();
+    s.getAgentVector()->push_back(Agent(agentNewId ,partyID, mSelectionPolicy));
+    Agent newAgent = s.getAgentVector()->back();
+    newAgent.coalition = coalition;
+}
+
+
 
 Coalition & Agent::getCoalition()
 {
