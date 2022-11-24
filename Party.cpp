@@ -14,6 +14,76 @@ Party::Party(int id, string name, int mandates, JoinPolicy *jp) {
 }
 
 
+Party::~Party ()
+{
+    if (this->mJoinPolicy)
+    {
+        delete mJoinPolicy;
+    }
+}
+
+//Copy Constructor:
+Party::Party(const Party & other)
+{
+    mId = other.mId;
+    mJoinPolicy =other.mJoinPolicy;
+    mCoalition = other.mCoalition;
+    mState = other.mState;
+    mOffers = other.mOffers;
+    mName =other.mName;
+    timer = other.timer;
+    mMandates = other.mMandates;
+    return *this;
+}
+
+//Move Constructor:
+Party::Party (Party && other) {
+    mId = other.mId;
+    mJoinPolicy =other.mJoinPolicy;
+    mCoalition = other.mCoalition;
+    mState = other.mState;
+    mOffers = other.mOffers;
+    mName =other.mName;
+    timer = other.timer;
+    mMandates = other.mMandates;
+    return *this;
+
+}
+
+//Copy Assignment Operator:
+Party& Party::operator=(const Party & other)
+{
+    mId = other.mId;
+    mJoinPolicy =other.mJoinPolicy;
+    mCoalition = other.mCoalition;
+    mState = other.mState;
+    mOffers = other.mOffers;
+    mName =other.mName;
+    timer = other.timer;
+    mMandates = other.mMandates;
+    return *this;
+}
+
+//Move Assignment Operator :
+Party & Party::operator=(Party && other) {
+    mId = other.mId;
+    mMandates = other.mMandates;
+    mState = other.mState;
+    mOffers = other.mOffers;
+    if(mJoinPolicy) {
+        delete mJoinPolicy;
+    }
+    if(mCoalition) {
+        delete mCoalition;
+    }
+    mCoalition = other.mCoalition;
+    other.mCoalition = nullptr;
+    mJoinPolicy = other.mJoinPolicy->clonePolicy();
+    other.mJoinPolicy = nullptr;
+
+    return *this;
+}
+
 
 std::vector<Agent> Party::getOffers() 
 {
@@ -54,12 +124,15 @@ void Party::step(Simulation &s)
         this->timer +=1;
     }
     if (this->timer == 3) {
-        Agent *chosen = mJoinPolicy->join(*this);
-        chosen-> newAgentClone(s,mId) ;
-        newAgent.setId(nextAgent);
-        newAgent.setPartyId(this->mId);
+        Agent *chosen = mJoinPolicy->join(this);
+        Agent ag = new Agent(*chosen);
+        ag.setPartyId(this->mId);
+        int nextAgentId = s.getAgents().size()-1;
+        ag.setId(nextAgentId);
         chosen->getCoalition().coalitionJoin(*this);
-        s.addAgent(newAgent);
+        s.addAgent(ag);
+        s.setCounterJoined();
+        s.updateBiggestCoalition(ag.mCoalition/getMandates())
     }
 
 }

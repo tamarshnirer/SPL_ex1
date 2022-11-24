@@ -19,6 +19,18 @@ Agent *MandatesJoinPolicy::join(Party mParty ) {
 
 }; 
 
+JoinPolicy* MandatesJoinPolicy::clonePolicy() {
+    MandatesJoinPolicy* CWPolicy = new MandatesJoinPolicy ();
+    return CWPolicy ;
+}
+
 Agent *LastOfferJoinPolicy::join(Party mParty) {
     return &mParty.getOffers()[mParty.getOffers().size()-1];
 }
+
+
+JoinPolicy* LastOfferJoinPolicy::clonePolicy() {
+    LastOfferJoinPolicy* CWPolicy = new LastOfferJoinPolicy ();
+    return CWPolicy ;
+}
+
